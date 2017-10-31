@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             R.raw.note7_b};
 
     private int soundArrayNumber;
+    private boolean soundPoolReady;
     private AudioAttributes.Builder mAAB;
     private SoundPool.Builder mSPB;
     private SoundPool mSP;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //Create AudioAttribute.Builder and set attributes
         mAAB = new AudioAttributes.Builder();
         mAAB.setUsage(AudioAttributes.USAGE_MEDIA);
-        mAAB.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC);
+        mAAB.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION);
         AudioAttributes audioAttributes = mAAB.build();
 
 
@@ -54,19 +55,24 @@ public class MainActivity extends AppCompatActivity {
         mSPB.setAudioAttributes(audioAttributes);
         mSP = mSPB.build(); //SoundPool object
 
-    }
-
-    // TODO: Add the play methods triggered by the buttons
-    public void playSoundFromSoundPool(View v){
-        soundArrayNumber = Integer.parseInt(v.getTag().toString());
-        Log.d("This app", "playSoundFromSoundPool: " + soundArrayNumber);
         mSP.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                int soundID = mSP.load(getApplicationContext(), soundArray[soundArrayNumber], PRIORITY);
-                mSP.play(soundArray[soundID],LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
+                soundPoolReady = true;
             }
         });
+
+    }
+
+    // TODO: Add the play methods triggered by the buttons
+    public void playSoundFromSoundPool(View v)throws Exception{
+        soundArrayNumber = Integer.parseInt(v.getTag().toString());
+        Log.d("This app", "playSoundFromSoundPool: " + soundArrayNumber);
+        mSP.load(getApplicationContext(), soundArray[soundArrayNumber], PRIORITY);
+        if(soundPoolReady){
+            Log.d("ss", "playSoundFromSoundPool: " + soundPoolReady);
+            mSP.play(soundArray[soundArrayNumber],LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
+        }
 
     }
 
