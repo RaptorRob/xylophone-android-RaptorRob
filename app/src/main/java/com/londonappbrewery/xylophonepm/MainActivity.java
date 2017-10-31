@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void playSoundFromSoundPool(View v){
         int soundArrayNumber = Integer.parseInt(v.getTag().toString());
         Log.d("This app", "playSoundFromSoundPool: " + soundArrayNumber);
-        int soundID = mSP.load(getApplicationContext(), R.raw.note1_c, PRIORITY);
+        int soundID = mSP.load(getApplicationContext(), soundArray[soundArrayNumber], PRIORITY);
         mSP.play(soundArray[soundID],LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
     }
 
