@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private final float LEFT_VOLUME = 1.0f;
     private final float RIGHT_VOLUME = 1.0f;
     private final int NO_LOOP = 0;
-    private final int PRIORITY = 0;
+    private final int PRIORITY = 1;
     private final float NORMAL_PLAY_RATE = 1.0f;
 
     // TODO: Add member variables here
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             R.raw.note6_a,
             R.raw.note7_b};
 
+    private int soundArrayNumber;
     private AudioAttributes.Builder mAAB;
     private SoundPool.Builder mSPB;
     private SoundPool mSP;
@@ -57,10 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO: Add the play methods triggered by the buttons
     public void playSoundFromSoundPool(View v){
-        int soundArrayNumber = Integer.parseInt(v.getTag().toString());
+        soundArrayNumber = Integer.parseInt(v.getTag().toString());
         Log.d("This app", "playSoundFromSoundPool: " + soundArrayNumber);
-        int soundID = mSP.load(getApplicationContext(),  soundArray[soundArrayNumber], PRIORITY);
-        mSP.play(soundArray[soundID],LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
+        mSP.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                int soundID = mSP.load(getApplicationContext(), soundArray[soundArrayNumber], PRIORITY);
+                mSP.play(soundArray[soundID],LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
+            }
+        });
+
     }
 
 
