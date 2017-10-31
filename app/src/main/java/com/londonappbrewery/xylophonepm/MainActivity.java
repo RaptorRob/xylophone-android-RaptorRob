@@ -1,10 +1,15 @@
 package com.londonappbrewery.xylophonepm;
 
+import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+
+import java.util.jar.Attributes;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,28 +22,46 @@ public class MainActivity extends AppCompatActivity {
     private final float NORMAL_PLAY_RATE = 1.0f;
 
     // TODO: Add member variables here
-    private int mCSoundId;
-    private int mDSoundId;
-    private int mESoundId;
-    private int mFSoundId;
-    private int mGSoundId;
-    private int mASoundId;
-    private int mBSoundId;
+    final int soundArray [] = {
+            R.raw.note1_c,
+            R.raw.note2_d,
+            R.raw.note3_e,
+            R.raw.note4_f,
+            R.raw.note5_g,
+            R.raw.note6_a,
+            R.raw.note7_b};
+
+    private AudioAttributes.Builder mAAB;
+    private SoundPool.Builder mSPB;
+    private SoundPool mSP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: Create a new SoundPool
+        //Create AudioAttribute.Builder and set attributes
+        mAAB = new AudioAttributes.Builder();
+        mAAB.setUsage(AudioAttributes.USAGE_MEDIA);
+        mAAB.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC);
+        AudioAttributes audioAttributes = mAAB.build();
 
 
-        // TODO: Load and get the IDs to identify the sounds
-
+        // TODO: Create a new SoundPoolBuilder and SoundPool
+        mSPB = new SoundPool.Builder();
+        mSPB.setMaxStreams(NR_OF_SIMULTANEOUS_SOUNDS);
+        mSPB.setAudioAttributes(audioAttributes);
+        mSP = mSPB.build(); //SoundPool object
 
     }
 
     // TODO: Add the play methods triggered by the buttons
+    public void playSoundFromSoundPool(View v){
+        int soundArrayNumber = Integer.parseInt(v.getTag().toString());
+        Log.d("This app", "playSoundFromSoundPool: " + soundArrayNumber);
+        int soundID = mSP.load(getApplicationContext(), R.raw.note1_c, PRIORITY);
+        mSP.play(soundArray[soundID],LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
+    }
 
 
 
