@@ -17,7 +17,7 @@
         android:background="@color/red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="0"
+        android:tag="mSoundIdC"
         android:onClick="playSoundFromSoundPool"/>
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="1"
+        android:tag="mSoundIdD"
         android:onClick="playSoundFromSoundPool"/>
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="2"
+        android:tag="mSoundIdE"
         android:onClick="playSoundFromSoundPool"/>
 
     <Button
@@ -50,7 +50,7 @@
         android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="3"
+        android:tag="mSoundIdF"
         android:onClick="playSoundFromSoundPool"/>
 
     <Button
@@ -61,7 +61,7 @@
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="4"
+        android:tag="mSoundIdG"
         android:onClick="playSoundFromSoundPool"/>
 
 
@@ -73,7 +73,7 @@
         android:layout_marginRight="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="5"
+        android:tag="mSoundIdA"
         android:onClick="playSoundFromSoundPool"/>
 
     <Button
@@ -84,7 +84,7 @@
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="6"
+        android:tag="mSoundIdB"
         android:onClick="playSoundFromSoundPool"/>
 
 </LinearLayout>
